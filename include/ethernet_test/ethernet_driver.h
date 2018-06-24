@@ -53,6 +53,7 @@ namespace ethernet_driver{
             std::string MCU_ip_string;
             in_addr MCU_ip;
             int MCU_UDP_PORT_NUMBER;
+            int POLL_TIMEOUT;
             // int MCU_socket_fd;
 
             // ROS related variables

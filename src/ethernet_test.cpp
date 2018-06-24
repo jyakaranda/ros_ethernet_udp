@@ -34,26 +34,20 @@ void udp_msg_sender(int sock_fd, const struct sockaddr* dst){
 
 		if(nbytes > 0){
 			ROS_INFO("send a udp packet to dst %f", ros::Time::now().toSec());
-			memset(buf, 0, sizeof(buf));
-			struct sockaddr_in src;
+			// memset(buf, 0, sizeof(buf));
+			// struct sockaddr_in src;
+			// ssize_t rbytes = recvfrom(sock_fd, buf, PACKET_SIZE, 0, (struct sockaddr*)&src, &len);
+			// if((size_t)rbytes == PACKET_SIZE){
+			// 	ROS_INFO("sender_address: %s", inet_ntoa(src.sin_addr));
+			// 	PacketData packet = *((PacketData*)(&(buf[0])));
+			// 	// if(inet_ntoa(src.sin_addr) == SERVER_IP){
+			// 		ROS_INFO("linear.x: %f", packet.dat.vel.liner[0]);
+			// 	// }
+			// } else{
+			// 	ROS_INFO("recv %d bytes from %s", (size_t)rbytes, inet_ntoa(src.sin_addr));
+			// }
 
-			struct pollfd fds[1];
-			fds[0].fd = sock_fd;
-			fds[0].events = POLLIN;
-			int flag = 1;
-
-			ssize_t rbytes = recvfrom(sock_fd, buf, PACKET_SIZE, 0, (struct sockaddr*)&src, &len);
-			if((size_t)rbytes == PACKET_SIZE){
-				ROS_INFO("sender_address: %s", inet_ntoa(src.sin_addr));
-				PacketData packet = *((PacketData*)(&(buf[0])));
-				// if(inet_ntoa(src.sin_addr) == SERVER_IP){
-					ROS_INFO("linear.x: %f", packet.dat.vel.liner[0]);
-				// }
-			} else{
-				ROS_INFO("recv %d bytes from %s", (size_t)rbytes, inet_ntoa(src.sin_addr));
-			}
-
-			// duration.sleep();
+			duration.sleep();
 		}
 	}
 }
